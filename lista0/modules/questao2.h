@@ -29,7 +29,7 @@ int questao2(){
   //elements of X on pair position
   j = 0;
   for(i = 0; i < 5;i++){
-    if(i % 2 == 0){
+    if(i % 2 == 0 && i != 0){
       w[j] = x[i];
     }else{
       w[j] = -1;

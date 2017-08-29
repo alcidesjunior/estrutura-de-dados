@@ -64,33 +64,33 @@ void novo_vetor(int *vet, int *len){ // Reorganiza o vetor
 }
 int questao5(){
   int tam=6, vetor[tam], nvetor[tam], aux=0, num, i=0;
-   do{ //Criando vetor
-       printf("Digite um numero: ");
-       scanf("%d", &num);
+      do{ //Criando vetor
+          printf("Digite um numero: ");
+          scanf("%d", &num);
 
-       if(num<256){
-           vetor[i]=num;
-            }
-           i++;
-   }while(i<tam);
+          if(num<256){
+              vetor[i]=num;
+               }
+              i++;
+      }while(i<tam);
 
-   printf("Vetor: ");
-   imprime_vetor(vetor, tam);
+      printf("Vetor: ");
+      imprime_vetor(vetor, tam);
 
-   printf("Repeticoes: %d repeticao\n", verif_repetido(vetor, tam));
-   novo_vetor(vetor, &tam);
+      printf("Repeticoes: %d repeticao\n", verif_repetido(vetor, tam));
+      novo_vetor(vetor, &tam);
 
-   ordena(vetor, tam);
-   printf("Novo vetor: ");
-   imprime_vetor(vetor, tam);
+      ordena(vetor, tam);
+      printf("Novo vetor: ");
+      imprime_vetor(vetor, tam);
 
-   printf("Procure um numero: ");
-   scanf("%d", &num);
-   if(busca_binaria(vetor, tam, num)){
-       printf("Numero encontrado!");
-   }
-   else {
-       printf("Numero nao encontrado!");
-   }
-   return 0;
+      printf("Procure um numero: ");
+      scanf("%d", &num);
+      if(busca_binaria(vetor, tam, num)){
+          printf("Numero encontrado!");
+      }
+      else {
+          printf("Numero nao encontrado!");
+      }
+      return 0;
 }

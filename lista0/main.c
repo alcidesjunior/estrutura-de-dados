@@ -19,6 +19,6 @@ int main(){
   // questao2();
   // questao3();
   // questao4();
-  // questao5();
+  questao5();
 
 }
