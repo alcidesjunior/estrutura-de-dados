@@ -24,11 +24,13 @@ int questao4(){
 
         qtde=0;
         printf("\nPrimos antecessores de %d: ", num);
+        if(num > 3){
         for(i=num-1; qtde<2; i--){
             if(primo(i)){
                 qtde++;
                 printf("%d, ", i);
             }
+        }
         }
     }
     return 0;

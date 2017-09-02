@@ -18,7 +18,7 @@ int main(){
   // questao1();
   // questao2();
   // questao3();
-  // questao4();
-  questao5();
+  questao4();
+  // questao5();
 
 }
