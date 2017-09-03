@@ -9,13 +9,13 @@ void questao56(){
   } Appoiment_book;
 
   // questão 6
-  int action,i,index=0;
-  char *string_search;
+  int action,i,j,current=0,id;
+  char string_search[60];
   Appoiment_book apmt[2];
 
   // menu
   void drawn(int qtd, char symbol){
-    for(i=0;i<qtd;i++){
+    for(j=0;j<qtd;j++){
       printf("%c",symbol);
     }
   }
@@ -30,31 +30,51 @@ void questao56(){
     drawn(40,'*');
     printf("\n");
   }
-  void insert(struct appoiment_book* apm,int index){
+  void insert(struct appoiment_book* apm,int current){
     printf("Nome: ");
-    fgets(apm[index].name,sizeof(apm[index].name),stdin);
-    __fpurge(stdin);
+    scanf(" %60[^\n]",apm[current].name);
     getchar();
     printf("Endereço: ");
-    fgets(apm[index].address,sizeof(apm[index].address),stdin);
-    __fpurge(stdin);
+    scanf(" %200[^\n]",apm[current].address);
     getchar();
     printf("Telefone: ");
-    fgets(apm[index].tel,sizeof(apm[index].tel),stdin);
-    __fpurge(stdin);
+    scanf(" %15[^\n]",apm[current].tel);
     getchar();
     printf("Status: [L - Livre | O - Ocupado | * Apagado] ");
-    fgets(apm[index].status,sizeof(apm[index].status),stdin);
-    __fpurge(stdin);
+    scanf(" %1[^\n]",apm[current].status);
     getchar();
-    printf("\n%s",apm[index].name);
+    printf("\n O ID DO SEU REGISTRO É [%d]\n",current);
   }
-  void find(struct appoiment_book* apm,char *search,int index){
-    // for(i=0;i<=index;i++){
-      // if(strcmp(apmt[i].name, search)==0){
-        printf("%s",apm[0].name);//apm[i].name);
-      // }
-    // }
+  void find(struct appoiment_book* apm,char *search,int current){
+    for(i=0;i<current;i++){
+      if(strcmp(apm[i].name, search)==0){
+        drawn(40,'#');
+        printf("\nRESULTADO DA BUSCA\n");
+        drawn(40,'#');
+        printf("\n");
+        printf("Nome: %s\n",apm[i].name);
+        printf("Endereço: %s\n",apm[i].address);
+        printf("Telefone: %s\n",apm[i].tel);
+        printf("Status: %s\n",apm[i].status);
+        drawn(40,'#');
+        printf("\n");
+        break;
+      }
+    }
+  }
+  void update(struct appoiment_book* apm,int id){
+    printf("Nome: ");
+    scanf(" %60[^\n]",apm[id].name);
+    getchar();
+    printf("Endereço: ");
+    scanf(" %200[^\n]",apm[id].address);
+    getchar();
+    printf("Telefone: ");
+    scanf(" %15[^\n]",apm[id].tel);
+    getchar();
+    printf("Status: [L - Livre | O - Ocupado | * Apagado] ");
+    scanf(" %1[^\n]",apm[id].status);
+    getchar();
   }
   // funcionalidade de fato
   do{
@@ -62,24 +82,25 @@ void questao56(){
     scanf("%d",&action);
     system("clear");
     if(action == 1){
-      if(index < 2){
-        insert(apmt, index);
-        index += 1;
+      if(current < 2){
+        insert(apmt, current);
+        current += 1;
       }else{
         drawn(40,'#');
-        printf("Para inserir mais registros, favor, comprar a licença PREMIUM pelo email:\n");
-        printf("chupaquedeuva@softwares.com\n");
+        printf("\nPara inserir mais registros, favor, comprar a licença PREMIUM pelo email:\n");
+        printf("pagueumboquete@online.com\n");
         drawn(40,'#');
+        printf("\n");
       }
     }else if(action == 2){
-      printf("Nome a ser pesquisado:(pressione enter para sair)");
-      scanf("%s",string_search);
-      // fgets(string_search,sizeof(string_search),stdin);
-      // __fpurge(stdin);
-
-      find(apmt,string_search,index);
+      printf("Nome a ser pesquisado: ");
+      scanf(" %60[^\n]",string_search);
+      find(apmt,string_search,current);
     }else if(action == 3){
-
+      printf("ID do usuário a ser atualizado: ");
+      scanf("%d",&id);
+      update(apmt,id);
+      printf("\nDados atualizados!\n");
     }
   }while(action != 4);
 }
