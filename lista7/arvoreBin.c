@@ -115,7 +115,7 @@ int insere_arv(arvBin *raiz, int valor){
       struct NO* ant = NULL;
       while(atual != NULL){//vai desccendo na arvore
         ant = atual;
-        if(valor = atual->info){//para evitar valores repetidos
+        if(valor == atual->info){//para evitar valores repetidos
           free(novo);//libera nó alocado
           return 0;//elemento já existe!
         }
