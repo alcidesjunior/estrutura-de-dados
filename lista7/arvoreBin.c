@@ -243,13 +243,18 @@ int main(){
   if(estaVazia_arv(raiz)){
     printf("arvore vazia\n");
   }
-  for(int i=8;i>1;i--){
-    if(insere_arv(raiz,i)){
-      printf("numero adicionado\n");
-    }else{
-      printf("ops\n");
-    }
-  }
+  // for(int i=8;i>1;i--){
+  //   if(insere_arv(raiz,i)){
+  //     printf("numero adicionado\n");
+  //   }else{
+  //     printf("ops\n");
+  //   }
+  // }
+  insere_arv(raiz,15);
+  insere_arv(raiz,10);
+  insere_arv(raiz,20);
+  insere_arv(raiz,50);
+  insere_arv(raiz,8);
   if(consulta_item_arv(raiz,25)){
     printf("achou\n");
   }else{
