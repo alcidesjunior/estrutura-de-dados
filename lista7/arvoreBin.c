@@ -71,28 +71,30 @@ int totalNO_arv(arvBin *raiz){
 
 }
 void preOrdem_arv(arvBin *raiz){
-  if(raiz==NULL) return 0;
-  if(*raiz==NULL) return 0;
+  if(raiz==NULL) return;
+  if(*raiz!=NULL){
     printf("%d\n",(*raiz)->info);
     preOrdem_arv(&((*raiz)->esq));
     preOrdem_arv(&((*raiz)->dir));
+  }
 
 }
 void emOrdem_arv(arvBin *raiz){
-  if(raiz==NULL) return 0;
-  if(*raiz==NULL) return 0;
+  if(raiz==NULL) return;
+  if(*raiz!=NULL){
     emOrdem_arv(&((*raiz)->esq));
     printf("%d\n",(*raiz)->info);
     emOrdem_arv(&((*raiz)->dir));
+  }
 
 }
 void posOrdem_arv(arvBin *raiz){
-  if(raiz==NULL) return 0;
-  if(*raiz==NULL) return 0;
+  if(raiz==NULL) return;
+  if(*raiz!=NULL){
     posOrdem_arv(&((*raiz)->esq));
     posOrdem_arv(&((*raiz)->dir));
     printf("%d\n",(*raiz)->info);
-
+  }
 }
 int insere_arv(arvBin *raiz, int valor){
   if(raiz==NULL) return 0;
