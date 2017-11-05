@@ -102,7 +102,6 @@ int insere_arv(arvBin *raiz, int valor){
     struct NO* novo;//alocando novo nó
     novo = (struct NO*) malloc(sizeof(struct NO));
     if(novo == NULL) return 0;
-    // if(!estaVazia_arv(novo)){//arvore válida
       novo->info = valor;
       novo->dir = NULL;
       novo->esq = NULL;
@@ -125,6 +124,7 @@ int insere_arv(arvBin *raiz, int valor){
             atual = atual->esq;
           }
         }
+        //insere como filho desse nó folha
         if(valor > ant->info)
           ant->dir = novo;
         else
@@ -240,18 +240,13 @@ int main(){
   if(estaVazia_arv(raiz)){
     printf("arvore vazia\n");
   }
-  // for(int i=8;i>1;i--){
-  //   if(insere_arv(raiz,i)){
-  //     printf("numero adicionado\n");
-  //   }else{
-  //     printf("ops\n");
-  //   }
-  // }
+
   insere_arv(raiz,15);
   insere_arv(raiz,10);
   insere_arv(raiz,20);
   insere_arv(raiz,50);
   insere_arv(raiz,8);
+  
   if(consulta_item_arv(raiz,25)){
     printf("achou\n");
   }else{
