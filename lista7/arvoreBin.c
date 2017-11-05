@@ -89,7 +89,8 @@ void emOrdem_arv(arvBin *raiz){
 
 }
 void posOrdem_arv(arvBin *raiz){
-  if(raiz==NULL) return;
+  if(raiz==NULL) 
+    return;
   if(*raiz!=NULL){
     posOrdem_arv(&((*raiz)->esq));
     posOrdem_arv(&((*raiz)->dir));
@@ -97,44 +98,42 @@ void posOrdem_arv(arvBin *raiz){
   }
 }
 int insere_arv(arvBin *raiz, int valor){
-  if(raiz==NULL) return 0;
-  // if(!estaVazia_arv(raiz)){
+    if(raiz==NULL) 
+      return 0;
     struct NO* novo;//alocando novo nó
     novo = (struct NO*) malloc(sizeof(struct NO));
-    if(novo == NULL) return 0;
-      novo->info = valor;
-      novo->dir = NULL;
-      novo->esq = NULL;
+    if(novo == NULL) 
+      return 0;
+    novo->info = valor;
+    novo->dir = NULL;
+    novo->esq = NULL;
       //procurar onde inserir o valor
-      if(*raiz == NULL)
-        *raiz = novo;
-      else{
-        struct NO* atual = *raiz;
-        struct NO* ant = NULL;
-        while(atual != NULL){//vai desccendo na arvore
-          ant = atual;
-          if(valor = atual->info){//para evitar valores repetidos
-            free(novo);//libera nó alocado
-            return 0;//elemento já existe!
-          }
-          if(valor > atual->info){
-            atual = atual->dir;
-          }
-          if(valor < atual->info){
-            atual = atual->esq;
-          }
+    if(*raiz == NULL)
+      *raiz = novo;
+    else{
+      struct NO* atual = *raiz;
+      struct NO* ant = NULL;
+      while(atual != NULL){//vai desccendo na arvore
+        ant = atual;
+        if(valor = atual->info){//para evitar valores repetidos
+          free(novo);//libera nó alocado
+          return 0;//elemento já existe!
         }
-        //insere como filho desse nó folha
-        if(valor > ant->info)
-          ant->dir = novo;
-        else
-          ant->esq = novo;
-
-        return 1;
+        if(valor > atual->info){
+          atual = atual->dir;
+        }
+        if(valor < atual->info){
+          atual = atual->esq;
+        }
       }
-    // }else{
-      // return 0;
-    // }
+      //insere como filho desse nó folha
+      if(valor > ant->info)
+        ant->dir = novo;
+      else
+        ant->esq = novo;
+
+      return 1;
+    }
 
 }/* condition */
 /*
@@ -206,7 +205,7 @@ int remove_arv(arvBin *raiz, int valor){
     //continua andando na arvore a procura do nó a ser removido
     ant = atual;
     if(valor > atual->info)
-      atual = atual->info;
+      atual = atual->dir;
     else
       atual = atual->esq;
   }
