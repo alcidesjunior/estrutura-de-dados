@@ -51,56 +51,52 @@ int estaVazia_arv(arvBin* raiz){
 }
 //saber a altura da arvore
 int altura_arv(arvBin *raiz){
-  if(!estaVazia_arv(raiz)){
+  if(raiz==NULL) return 0;
+  if(*raiz==NULL) return 0;
     int alt_esq = altura_arv(&((*raiz)->esq));//chamada recurvisa p/ sub arvora da esq
     int alt_dir = altura_arv(&((*raiz)->dir));//chamada recurvisa p/ sub arvora da dir
     if(alt_esq > alt_dir)
       return (alt_esq + 1);
     else
       return (alt_dir + 1);
-  }else{
-    return 0;
-  }
+
 }
 //saber total de nós da arvore
 int totalNO_arv(arvBin *raiz){
-  if(!estaVazia_arv(raiz)){
+  if(raiz==NULL) return 0;
+  if(*raiz==NULL) return 0;
     int alt_esq = totalNO_arv(&((*raiz)->esq));//percorre o nó da esquerda
     int alt_dir = totalNO_arv(&((*raiz)->dir));//percorre o nó da direita
     return(alt_esq + alt_dir + 1);//soma o total de nós daquel percurso
-  }else{
-    return 0;
-  }
+
 }
 void preOrdem_arv(arvBin *raiz){
-  if(!estaVazia_arv(raiz)){
+  if(raiz==NULL) return 0;
+  if(*raiz==NULL) return 0;
     printf("%d\n",(*raiz)->info);
     preOrdem_arv(&((*raiz)->esq));
     preOrdem_arv(&((*raiz)->dir));
-  }else{
-    return;
-  }
+
 }
 void emOrdem_arv(arvBin *raiz){
-  if(!estaVazia_arv(raiz)){
+  if(raiz==NULL) return 0;
+  if(*raiz==NULL) return 0;
     emOrdem_arv(&((*raiz)->esq));
     printf("%d\n",(*raiz)->info);
     emOrdem_arv(&((*raiz)->dir));
-  }else{
-    return;
-  }
+
 }
 void posOrdem_arv(arvBin *raiz){
-  if(!estaVazia_arv(raiz)){
+  if(raiz==NULL) return 0;
+  if(*raiz==NULL) return 0;
     posOrdem_arv(&((*raiz)->esq));
     posOrdem_arv(&((*raiz)->dir));
     printf("%d\n",(*raiz)->info);
-  }else{
-    return;
-  }
+
 }
 int insere_arv(arvBin *raiz, int valor){
-    if(raiz == NULL) return 0;
+  if(raiz==NULL) return 0;
+  if(*raiz==NULL) return 0;
   // if(!estaVazia_arv(raiz)){
     struct NO* novo;//alocando novo nó
     novo = (struct NO*) malloc(sizeof(struct NO));
