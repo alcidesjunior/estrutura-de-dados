@@ -98,7 +98,6 @@ void posOrdem_arv(arvBin *raiz){
 }
 int insere_arv(arvBin *raiz, int valor){
   if(raiz==NULL) return 0;
-  if(*raiz==NULL) return 0;
   // if(!estaVazia_arv(raiz)){
     struct NO* novo;//alocando novo nó
     novo = (struct NO*) malloc(sizeof(struct NO));
