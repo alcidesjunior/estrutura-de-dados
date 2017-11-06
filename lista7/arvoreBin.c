@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "arvoreBin.h"
 
-
 struct NO{
   int info;
   struct NO *esq;
@@ -25,24 +24,24 @@ arvBin* cria_arv(){
   */
 }
 //libera nó a nó
-void libera_NO(struct NO* no){
+void libera_NO(struct NO *no){
   if(no == NULL)
     return;//não há o que fazer
-  libera_NO(no->esq);//percorre recursivamente
-  libera_NO(no->dir);//percorre recursivamente
+  libera_NO(((struct NO *)no)->esq);//percorre recursivamente
+  libera_NO(((struct NO *)no)->dir);//percorre recursivamente
   free(no);//libera o NÓ
   no = NULL;//para evitar algum erro posterior
 
 }
 //libera árvore
-void libera_arv(arvBin* raiz){
+void libera_arv(arvBin *raiz){
   if(raiz == NULL)
     return;//não há o que fazer
-  libera_NO(*raiz);//libera cada nó
-  free(raiz);//libera a raiz
+  libera_NO((struct NO *)raiz);//libera cada nó
+  // free(raiz);//libera a raiz
 }
 //está vazia?
-int estaVazia_arv(arvBin* raiz){
+int estaVazia_arv(arvBin *raiz){
   if(raiz == NULL)//se a raiz == null
     return 1;
   if(*raiz == NULL)//se o conteúdo da raiz == null
@@ -51,40 +50,50 @@ int estaVazia_arv(arvBin* raiz){
 }
 //saber a altura da arvore
 int altura_arv(arvBin *raiz){
-  if(raiz==NULL) return 0;
-  if(*raiz==NULL) return 0;
-    int alt_esq = altura_arv(&((*raiz)->esq));//chamada recurvisa p/ sub arvora da esq
-    int alt_dir = altura_arv(&((*raiz)->dir));//chamada recurvisa p/ sub arvora da dir
-    if(alt_esq > alt_dir)
-      return (alt_esq + 1);
-    else
-      return (alt_dir + 1);
-
+//   if(raiz==NULL) 
+//     return 0;
+//   if(*raiz==NULL) 
+    return 0;
+  int alt_esq = altura_arv(&((*raiz)->esq));//chamada recurvisa p/ sub arvora da esq
+  int alt_dir = altura_arv(&((*raiz)->dir));//chamada recurvisa p/ sub arvora da dir
+  if(alt_esq > alt_dir)
+    return (alt_esq + 1);
+  else
+    return (alt_dir + 1);
 }
 //saber total de nós da arvore
 int totalNO_arv(arvBin *raiz){
-  if(raiz==NULL) return 0;
-  if(*raiz==NULL) return 0;
-    int alt_esq = totalNO_arv(&((*raiz)->esq));//percorre o nó da esquerda
-    int alt_dir = totalNO_arv(&((*raiz)->dir));//percorre o nó da direita
-    return(alt_esq + alt_dir + 1);//soma o total de nós daquel percurso
-
+  if(raiz==NULL) 
+    return 0;
+  if(*raiz==NULL) 
+    return 0;
+  int alt_esq = totalNO_arv(&((*raiz)->esq));//percorre o nó da esquerda
+  int alt_dir = totalNO_arv(&((*raiz)->dir));//percorre o nó da direita
+  return(alt_esq + alt_dir + 1);//soma o total de nós daquel percurso
 }
 void preOrdem_arv(arvBin *raiz){
-  if(raiz==NULL) return;
+  if(raiz==NULL) 
+    return;
   if(*raiz!=NULL){
-    printf("%d\n",(*raiz)->info);
-    preOrdem_arv(&((*raiz)->esq));
-    preOrdem_arv(&((*raiz)->dir));
+    struct NO *r = (struct NO *)raiz;
+    struct NO *esq = r->esq;
+    struct NO *dir = r->dir;
+    printf("%d\n",( (struct NO *)raiz )->info);
+    preOrdem_arv((arvBin *)esq);
+    preOrdem_arv((arvBin *)dir);
   }
 
 }
 void emOrdem_arv(arvBin *raiz){
-  if(raiz==NULL) return;
+  if(raiz==NULL) 
+    return;
   if(*raiz!=NULL){
-    emOrdem_arv(&((*raiz)->esq));
-    printf("%d\n",(*raiz)->info);
-    emOrdem_arv(&((*raiz)->dir));
+    struct NO *r = (struct NO *)raiz;
+    struct NO *esq = r->esq;
+    struct NO *dir = r->dir;
+    emOrdem_arv((arvBin *)esq);
+    printf("%d\n",( (struct NO *)raiz )->info);
+    emOrdem_arv((arvBin *)dir);
   }
 
 }
@@ -92,27 +101,31 @@ void posOrdem_arv(arvBin *raiz){
   if(raiz==NULL) 
     return;
   if(*raiz!=NULL){
-    posOrdem_arv(&((*raiz)->esq));
-    posOrdem_arv(&((*raiz)->dir));
-    printf("%d\n",(*raiz)->info);
+    struct NO *r = (struct NO *)raiz;
+    struct NO *esq = r->esq;
+    struct NO *dir = r->dir;
+    posOrdem_arv( (arvBin *)esq );
+    posOrdem_arv( (arvBin *)dir );
+    printf("%d\n",( (struct NO *)raiz )->info);
   }
 }
 int insere_arv(arvBin *raiz, int valor){
-    if(raiz==NULL) 
-      return 0;
-    struct NO* novo;//alocando novo nó
-    novo = (struct NO*) malloc(sizeof(struct NO));
+    struct NO *novo;//alocando novo nó
+    novo = (struct NO*) malloc(sizeof(struct NO*));
     if(novo == NULL) 
       return 0;
     novo->info = valor;
     novo->dir = NULL;
     novo->esq = NULL;
       //procurar onde inserir o valor
-    if(*raiz == NULL)
-      *raiz = novo;
-    else{
-      struct NO* atual = *raiz;
-      struct NO* ant = NULL;
+    if(*raiz == NULL){
+      struct NO *tmp = (struct NO *)raiz;
+      tmp->info = valor;
+      tmp->esq = NULL;
+      tmp->dir = NULL;
+    }else{
+      struct NO *atual = (struct NO *)raiz;
+      struct NO *ant = NULL;
       while(atual != NULL){//vai desccendo na arvore
         ant = atual;
         if(valor == atual->info){//para evitar valores repetidos
@@ -121,21 +134,21 @@ int insere_arv(arvBin *raiz, int valor){
         }
         if(valor > atual->info){
           atual = atual->dir;
-        }
-        if(valor < atual->info){
+        }else if(valor < atual->info){
           atual = atual->esq;
         }
       }
       //insere como filho desse nó folha
-      if(valor > ant->info)
+      if(valor > ant->info){
         ant->dir = novo;
-      else
-        ant->esq = novo;
-
+      }else{
+        ant->esq = novo; 
+      }
+      
       return 1;
     }
-
-}/* condition */
+    return 0;
+}
 /*
 Remoção
 Para remoção existem 3 casos:
@@ -143,7 +156,7 @@ Para remoção existem 3 casos:
 2 - nó com apenas 1 filho.
 3 - nó com 2 filhos.
 */
-struct NO* remove_atual(struct NO* atual){
+struct NO *remove_atual(struct NO *atual){
   struct NO *no1, *no2;
   /*
   sem filho da esquerda
@@ -184,9 +197,10 @@ struct NO* remove_atual(struct NO* atual){
 }
 int remove_arv(arvBin *raiz, int valor){
   //validando a arvore
-  if(raiz == NULL) return 0;
-  struct NO* ant = NULL;
-  struct NO* atual = *raiz;
+  if(*raiz == NULL) 
+    return 0;
+  struct NO *atual = (struct NO *)raiz;
+  struct NO *ant = NULL;
   //enquanto for diferente de null fico fazendo a busca
   while(atual != NULL){
     //achou o nó a ser removido. Tratar o lado da remoção
@@ -209,6 +223,7 @@ int remove_arv(arvBin *raiz, int valor){
     else
       atual = atual->esq;
   }
+  return 0;
 }
 
 /*
@@ -222,7 +237,7 @@ int remove_arv(arvBin *raiz, int valor){
 */
 int consulta_item_arv(arvBin *raiz, int valor){
   if(raiz == NULL) return 0;
-  struct NO* atual = *raiz;
+  struct NO *atual = (struct NO *)raiz;
   while (atual != NULL) {
     if(valor == atual->info)
       return 1;
@@ -235,7 +250,7 @@ int consulta_item_arv(arvBin *raiz, int valor){
   return 0;
 }
 int main(){
-  arvBin* raiz = cria_arv();
+  arvBin *raiz = cria_arv();
   if(estaVazia_arv(raiz)){
     printf("arvore vazia\n");
   }
@@ -246,13 +261,16 @@ int main(){
   insere_arv(raiz,50);
   insere_arv(raiz,8);
   
-  if(consulta_item_arv(raiz,25)){
+  
+  if(estaVazia_arv(raiz)){
+    printf("arvore vazia\n");
+  }
+    // remove_arv(raiz, 8);
+  emOrdem_arv(raiz);
+  // libera_arv(raiz);
+  if(consulta_item_arv(raiz,20)){
     printf("achou\n");
   }else{
     printf("nao achou\n");
   }
-  if(estaVazia_arv(raiz)){
-    printf("arvore vazia\n");
-  }
-  posOrdem_arv(raiz);
 }
