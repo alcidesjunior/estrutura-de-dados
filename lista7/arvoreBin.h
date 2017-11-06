@@ -10,3 +10,7 @@ void posOrdem_arv(arvBin *raiz);
 int insere_arv(arvBin *raiz, int valor);
 int remove_arv(arvBin *raiz, int valor);
 int consulta_item_arv(arvBin *raiz, int valor);
+
+int consulta_emordem(arvBin *raiz, int valor);
+int consulta_preordem(arvBin *raiz, int valor);
+int consulta_posordem(arvBin *raiz, int valor);
