@@ -29,8 +29,9 @@ void libera_NO(struct NO *no){
     return;//não há o que fazer
   libera_NO(((struct NO *)no)->esq);//percorre recursivamente
   libera_NO(((struct NO *)no)->dir);//percorre recursivamente
-  // free(no);//libera o NÓ
+  //libera o NÓ
   no = NULL;//para evitar algum erro posterior
+  free(no);
 
 }
 //libera árvore
@@ -193,6 +194,7 @@ struct NO *remove_atual(struct NO *atual){
   }
   no2->dir = atual->dir;
   free(atual);
+  atual = NULL;
   return no2;
 }
 int remove_arv(arvBin *raiz, int valor){
@@ -265,8 +267,8 @@ int main(){
   if(estaVazia_arv(raiz)){
     printf("arvore vazia\n");
   }
-    // remove_arv(raiz, 8);
-    // remove_arv(raiz, 50);
+    remove_arv(raiz, 8);
+    remove_arv(raiz, 50);
   printf("Em ordem\n");
   emOrdem_arv(raiz);
   printf("=========\n");
@@ -276,7 +278,7 @@ int main(){
   printf("Pos ordem\n");
   posOrdem_arv(raiz);
   printf("=========\n");
-  // libera_arv(raiz);
+  libera_arv(raiz);
   // if(consulta_item_arv(raiz,20)){
   //   printf("achou\n");
   // }else{
@@ -284,5 +286,7 @@ int main(){
   // }
   if(estaVazia_arv(raiz)){
     printf("arvore vazia\n");
+  }else{
+    printf("nao vazia");
   }
 }
