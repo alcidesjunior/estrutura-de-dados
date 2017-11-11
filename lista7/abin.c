@@ -26,18 +26,6 @@ int estaVazia(NO *raiz){
     }
     return 0;
 }
-NO* buscar(NO *raiz,int valor){
-    if(raiz == NULL)
-        return NULL;
-    if(raiz->valor == valor){
-        return raiz;
-    }
-    if(valor > raiz->valor){
-        return buscar(raiz->dir,valor);
-    }
-    return buscar(raiz->esq,valor);
-
-}
 NO* buscaItem(NO *raiz, int valor){
     if(raiz == NULL)
         return 0;
